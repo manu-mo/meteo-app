@@ -1,0 +1,51 @@
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" [routerLink]="'/home'">
+          <img src="https://m.media-amazon.com/images/I/41wkG24yDkL.png" alt="" width="50" height="50" 
+          class="d-inline-block align-text-top">
+          <span class="ms-1">Meteo</span>
+        </a>
+    </div>
+</nav>
+
+<p class="lead mt-2">You searched for the coordinates: {{jsonIn.lat}}, {{jsonIn.lng}} </p>
+
+<div class="row row-cols-1 row-cols-sm-2 g-3 mb-3">
+    <div class="col d-flex justify-content-center">
+      <div class="card text-center" style="width:18rem;">
+        <img src="assets/img/sunrise-128.png" class="card-img-top mx-auto" style="width: 8rem;" alt="card-grid-image">
+        <div class="card-body">
+          <h5 class="card-title">Sunrise</h5>
+          <p class="card-text">{{sunRiseSet.sunrise}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+      <div class="card text-center" style="width:18rem;">
+        <img src="assets/img/sunset-128.png" class="card-img-top mx-auto" style="width: 8rem;" alt="card-grid-image">
+        <div class="card-body">
+          <h5 class="card-title">Sunset</h5>
+          <p class="card-text">{{sunRiseSet.sunset}}</p>
+        </div>
+      </div>
+    </div>
+</div>  
+
+<table class="table text-center table-striped table-bordered mb-4">
+    <thead class="table-dark">
+        <tr>
+            <th class="col-4">Time</th>
+            <th class="col-4">Temperature</th>
+            <th class="col-4">Cloudy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of weather">
+            <td class="align-middle">{{item.time}}</td>
+            <td class="align-middle">{{item.temperature}}°</td>
+            <td *ngIf="item.cloudy>=1 && item.cloudy<4" class="p-0"><img src="https://www.7timer.info/img/misc/about_two_clear.png" alt=""></td>
+            <td *ngIf="item.cloudy>3 && item.cloudy<7" class="p-0"><img src="https://www.7timer.info/img/misc/about_two_pcloudy.png" alt=""></td>
+            <td *ngIf="item.cloudy>6 && item.cloudy<=9" class="p-0"><img src="https://www.7timer.info/img/misc/about_two_cloudy.png" alt=""></td>
+        </tr>
+    </tbody>
+</table>
